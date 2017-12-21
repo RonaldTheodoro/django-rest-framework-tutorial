@@ -1,50 +1,13 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import generics
 
 from . import models, serializers
 
 
-@api_view(['GET', 'POST'])
-def snippet_list(request, format=None):
-    if request.method == 'GET':
-        snippets = models.Snippet.objects.all()
-        serializer = serializers.SnippetSerializer(snippets, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = serializers.SnippetSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class SnippetList(generics.ListCreateAPIView):
+    queryset = models.Snippet.objects.all()
+    serializer_class = serializers.SnippetSerializer
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def snippet_detail(request, pk, format=None):
-    try:
-        snippet = models.Snippet.objects.get(pk=pk)
-    except models.Snippet.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = serializers.SnippetSerializer(snippet)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = serializers.SnippetSerializer(snippet, data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'DELETE':
-        snippet.delete()
-        return Response(status=204)
+class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Snippet.objects.all()
+    serializer_class = serializers.SnippetSerializer
