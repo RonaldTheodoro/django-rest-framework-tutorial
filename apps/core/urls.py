@@ -7,11 +7,17 @@ from . import views
 app_name = 'core'
 
 urlpatterns = [
-    url(r'^snippets/$', views.SnippetList.as_view(), name='list'),
+    url(r'^snippets/$', views.SnippetList.as_view(), name='snippet_list'),
     url(
         r'^snippets/(?P<pk>[\d]+)/$',
         views.SnippetDetail.as_view(),
-        name='detail'
+        name='snippet_detail'
+    ),
+    url(r'^users/$', views.UserList.as_view(), name='user_list'),
+    url(
+        r'^users/(?P<pk>[\d]+)/$',
+        views.UserDetail.as_view(),
+        name='user_detail'
     ),
 ]
 
