@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from . import views
 
@@ -6,6 +7,8 @@ from . import views
 app_name = 'core'
 
 urlpatterns = [
-    url(r'^$', views.snippet_list, name='list'),
-    url(r'^(?P<pk>[\d]+)/$', views.snippet_detail, name='detail'),
+    url(r'^snippets/$', views.snippet_list, name='list'),
+    url(r'^snippets/(?P<pk>[\d]+)/$', views.snippet_detail, name='detail'),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
