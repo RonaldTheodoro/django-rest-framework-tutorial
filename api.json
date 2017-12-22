@@ -1,0 +1,94 @@
+{
+    "_type":"document",
+    "_meta":{
+        "url":"http://127.0.0.1:8000/schema/",
+        "title":"Pastebin API"
+    },
+    "snippets":{
+        "list":{
+            "_type":"link",
+            "url":"/snippets/",
+            "action":"get",
+            "fields":[
+                {
+                    "name":"page",
+                    "location":"query",
+                    "schema":{
+                        "_type":"integer",
+                        "title":"Page",
+                        "description":"A page number within the paginated result set."
+                    }
+                }
+            ]
+        },
+        "read":{
+            "_type":"link",
+            "url":"/snippets/{id}/",
+            "action":"get",
+            "fields":[
+                {
+                    "name":"id",
+                    "required":true,
+                    "location":"path",
+                    "schema":{
+                        "_type":"integer",
+                        "title":"ID",
+                        "description":"A unique integer value identifying this snippet."
+                    }
+                }
+            ]
+        },
+        "highlight":{
+            "_type":"link",
+            "url":"/snippets/{id}/highlight/",
+            "action":"get",
+            "fields":[
+                {
+                    "name":"id",
+                    "required":true,
+                    "location":"path",
+                    "schema":{
+                        "_type":"integer",
+                        "title":"ID",
+                        "description":"A unique integer value identifying this snippet."
+                    }
+                }
+            ]
+        }
+    },
+    "users":{
+        "list":{
+            "_type":"link",
+            "url":"/users/",
+            "action":"get",
+            "fields":[
+                {
+                    "name":"page",
+                    "location":"query",
+                    "schema":{
+                        "_type":"integer",
+                        "title":"Page",
+                        "description":"A page number within the paginated result set."
+                    }
+                }
+            ]
+        },
+        "read":{
+            "_type":"link",
+            "url":"/users/{id}/",
+            "action":"get",
+            "fields":[
+                {
+                    "name":"id",
+                    "required":true,
+                    "location":"path",
+                    "schema":{
+                        "_type":"integer",
+                        "title":"ID",
+                        "description":"A unique integer value identifying this user."
+                    }
+                }
+            ]
+        }
+    }
+}
